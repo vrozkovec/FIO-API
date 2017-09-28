@@ -1,4 +1,4 @@
-package fio.client;
+package cz.fio.api.client;
 
 public class InvalidParametersException extends Exception {
 	/**

@@ -1,4 +1,4 @@
-package fio.client.result;
+package cz.fio.api.client.result;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -7,7 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import fio.client.FioConstants;
+import cz.fio.api.client.FioConstants;
+import cz.fio.api.client.result.FioResult;
 
 public class FioResultTest {
 	private static final String DARK_STRING = "\u011B\u0161\u010D\u0159\u017E\u00FD\u00E1\u00ED\u00E9\u016F";

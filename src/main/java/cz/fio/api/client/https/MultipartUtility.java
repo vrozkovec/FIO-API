@@ -1,4 +1,4 @@
-package fio.client.https;
+package cz.fio.api.client.https;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package fio.client;
+package cz.fio.api.client;
 
 import java.net.URISyntaxException;
 import java.util.Calendar;
@@ -14,11 +14,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import fio.client.FioConstants.AnswerFormat;
-import fio.client.FioConstants.OrderFormat;
-import fio.client.https.BasicHttpsConnector;
-import fio.client.https.HttpsRequestException;
-import fio.client.result.FioResult;
+import cz.fio.api.client.FioClient;
+import cz.fio.api.client.InvalidParametersException;
+import cz.fio.api.client.FioConstants.AnswerFormat;
+import cz.fio.api.client.FioConstants.OrderFormat;
+import cz.fio.api.client.https.BasicHttpsConnector;
+import cz.fio.api.client.https.HttpsRequestException;
+import cz.fio.api.client.result.FioResult;
 
 public class FioClientApiFunctionsTest {
 	/**

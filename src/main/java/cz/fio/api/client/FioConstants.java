@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fio.client;
+package cz.fio.api.client;
 
 /**
  * Trida obsahujici konstanty pouzite napric FIO API Tak jak jsou definovany v

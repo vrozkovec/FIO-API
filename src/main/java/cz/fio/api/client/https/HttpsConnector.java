@@ -1,10 +1,10 @@
-package fio.client.https;
+package cz.fio.api.client.https;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import fio.client.FioClient;
+import cz.fio.api.client.FioClient;
 
 /**
  * Rozhrani pouzivane tridou {@link FioClient} pro ziskani dat z HTTPS serveru

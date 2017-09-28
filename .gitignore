@@ -5,3 +5,6 @@ build/
 .gradle/
 .classpath
 .project
+velocity.log*
+target
+hs_err*

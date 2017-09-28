@@ -1,16 +1,16 @@
-package fio.client;
+package cz.fio.api.client;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import fio.client.FioConstants.AnswerFormat;
-import fio.client.FioConstants.Languages;
-import fio.client.FioConstants.OrderFormat;
-import fio.client.https.BasicHttpsConnector;
-import fio.client.https.HttpsConnector;
-import fio.client.https.HttpsRequestException;
-import fio.client.result.FioResult;
+import cz.fio.api.client.FioConstants.AnswerFormat;
+import cz.fio.api.client.FioConstants.Languages;
+import cz.fio.api.client.FioConstants.OrderFormat;
+import cz.fio.api.client.https.BasicHttpsConnector;
+import cz.fio.api.client.https.HttpsConnector;
+import cz.fio.api.client.https.HttpsRequestException;
+import cz.fio.api.client.result.FioResult;
 
 public class FioClient {
 	private static final String HTTPS_WWW_FIO_CZ = "https://www.fio.cz/ib_api/rest/";

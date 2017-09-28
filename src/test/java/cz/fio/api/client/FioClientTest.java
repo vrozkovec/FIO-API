@@ -1,7 +1,10 @@
-package fio.client;
+package cz.fio.api.client;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import cz.fio.api.client.FioClient;
+import cz.fio.api.client.FioConstants;
 
 public class FioClientTest {
 	@Test

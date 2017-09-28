@@ -1,4 +1,4 @@
-package fio.client.https;
+package cz.fio.api.client.https;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class BasicHttpsConnector implements HttpsConnector {
 	private SSLSocketFactory defaultSSLSocketFactory;
 
 	/**
-	 * @see fio.client.https.HttpsConnector#getData(java.lang.String)
+	 * @see cz.fio.api.client.https.HttpsConnector#getData(java.lang.String)
 	 */
 	@Override
 	public byte[] getData(String url) throws HttpsRequestException {
@@ -33,7 +33,7 @@ public class BasicHttpsConnector implements HttpsConnector {
 	}
 
 	/**
-	 * @see fio.client.https.HttpsConnector#getData(java.net.URL)
+	 * @see cz.fio.api.client.https.HttpsConnector#getData(java.net.URL)
 	 */
 	@Override
 	public byte[] getData(URL url) throws HttpsRequestException {
@@ -75,7 +75,7 @@ public class BasicHttpsConnector implements HttpsConnector {
 	}
 
 	/**
-	 * @see fio.client.https.HttpsConnector#getPostData(java.net.URL,
+	 * @see cz.fio.api.client.https.HttpsConnector#getPostData(java.net.URL,
 	 *      java.util.HashMap)
 	 */
 	@Override
@@ -88,7 +88,7 @@ public class BasicHttpsConnector implements HttpsConnector {
 	}
 
 	/**
-	 * @see fio.client.https.HttpsConnector#getPostData(java.lang.String,
+	 * @see cz.fio.api.client.https.HttpsConnector#getPostData(java.lang.String,
 	 *      java.util.HashMap)
 	 */
 	@Override

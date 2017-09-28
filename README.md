@@ -19,3 +19,6 @@ It should be:
 - minimalistic (no fancy dependencies)
 - usable on the Android platform (usage of basic Java API)
 - capable of synchronous and asynchronous usage
+
+
+Adopted for maven from the repo https://github.com/DeziderMesko/FIO-API

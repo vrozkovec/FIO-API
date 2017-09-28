@@ -1,8 +1,8 @@
-package fio.client.result;
+package cz.fio.api.client.result;
 
 import java.io.UnsupportedEncodingException;
 
-import fio.client.FioConstants;
+import cz.fio.api.client.FioConstants;
 
 /**
  * Objekt reprezentujici odpoved serveru na dotaz. Obsahuje URL ze ktere byla
@@ -57,7 +57,7 @@ public class FioResult {
 	}
 
 	/**
-	 * @see fio.client.result.FioResult#getResponseAsText()
+	 * @see cz.fio.api.client.result.FioResult#getResponseAsText()
 	 */
 	public String getResponseAsText() {
 		if (answerFormat.isBinary()) {

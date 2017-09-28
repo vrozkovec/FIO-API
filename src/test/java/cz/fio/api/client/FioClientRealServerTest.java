@@ -1,11 +1,14 @@
-package fio.client;
+package cz.fio.api.client;
 
 import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import fio.client.https.HttpsRequestException;
-import fio.client.result.FioResult;
+import cz.fio.api.client.FioClient;
+import cz.fio.api.client.FioConstants;
+import cz.fio.api.client.InvalidParametersException;
+import cz.fio.api.client.https.HttpsRequestException;
+import cz.fio.api.client.result.FioResult;
 
 public class FioClientRealServerTest {
 
