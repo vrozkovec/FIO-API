@@ -16,7 +16,8 @@ import javax.net.ssl.SSLSocketFactory;
  * @author dezider.mesko
  * 
  */
-public class BasicHttpsConnector implements HttpsConnector {
+public class BasicHttpsConnector implements HttpsConnector
+{
 
 	private SSLSocketFactory defaultSSLSocketFactory;
 
@@ -24,10 +25,14 @@ public class BasicHttpsConnector implements HttpsConnector {
 	 * @see cz.fio.api.client.https.HttpsConnector#getData(java.lang.String)
 	 */
 	@Override
-	public byte[] getData(String url) throws HttpsRequestException {
-		try {
+	public byte[] getData(String url) throws HttpsRequestException
+	{
+		try
+		{
 			return getData(new URL(url));
-		} catch (MalformedURLException e) {
+		}
+		catch (MalformedURLException e)
+		{
 			throw new HttpsRequestException(e);
 		}
 	}
@@ -36,27 +41,39 @@ public class BasicHttpsConnector implements HttpsConnector {
 	 * @see cz.fio.api.client.https.HttpsConnector#getData(java.net.URL)
 	 */
 	@Override
-	public byte[] getData(URL url) throws HttpsRequestException {
+	public byte[] getData(URL url) throws HttpsRequestException
+	{
 		InputStream is = null;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		try {
-			if (defaultSSLSocketFactory != null) {
+		try
+		{
+			if (defaultSSLSocketFactory != null)
+			{
 				HttpsURLConnection.setDefaultSSLSocketFactory(defaultSSLSocketFactory);
 			}
-			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+			HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
 
 			is = connection.getInputStream();
 			byte value;
-			while ((value = (byte) is.read()) != -1) {
+			while ((value = (byte)is.read()) != -1)
+			{
 				baos.write(value);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			throw new HttpsRequestException(e);
-		} finally {
-			if (is != null) {
-				try {
+		}
+		finally
+		{
+			if (is != null)
+			{
+				try
+				{
 					is.close();
-				} catch (IOException e) {
+				}
+				catch (IOException e)
+				{
 					// who cares?
 					e.printStackTrace();
 				}
@@ -70,29 +87,33 @@ public class BasicHttpsConnector implements HttpsConnector {
 	 * 
 	 * @param defaultSSLSocketFactory
 	 */
-	protected void setDefaultSSLSocketFactory(SSLSocketFactory defaultSSLSocketFactory) {
+	protected void setDefaultSSLSocketFactory(SSLSocketFactory defaultSSLSocketFactory)
+	{
 		this.defaultSSLSocketFactory = defaultSSLSocketFactory;
 	}
 
 	/**
-	 * @see cz.fio.api.client.https.HttpsConnector#getPostData(java.net.URL,
-	 *      java.util.HashMap)
+	 * @see cz.fio.api.client.https.HttpsConnector#getPostData(java.net.URL, java.util.HashMap)
 	 */
 	@Override
-	public byte[] getPostData(String url, Map<String, String> map) throws HttpsRequestException {
-		try {
+	public byte[] getPostData(String url, Map<String, String> map) throws HttpsRequestException
+	{
+		try
+		{
 			return getPostData(new URL(url), map);
-		} catch (MalformedURLException e) {
+		}
+		catch (MalformedURLException e)
+		{
 			throw new HttpsRequestException(e);
 		}
 	}
 
 	/**
-	 * @see cz.fio.api.client.https.HttpsConnector#getPostData(java.lang.String,
-	 *      java.util.HashMap)
+	 * @see cz.fio.api.client.https.HttpsConnector#getPostData(java.lang.String, java.util.HashMap)
 	 */
 	@Override
-	public byte[] getPostData(URL url, Map<String, String> parameters) throws HttpsRequestException {
+	public byte[] getPostData(URL url, Map<String, String> parameters) throws HttpsRequestException
+	{
 		return null;
 	}
 }

@@ -10,11 +10,13 @@ package cz.fio.api.client;
  * @author dezider.mesko
  * 
  */
-public class FioConstants {
+public class FioConstants
+{
 	/**
 	 * Mozne formaty vraceny serverm FIO
 	 */
-	public enum AnswerFormat {
+	public enum AnswerFormat
+	{
 		xml, json, ofx, gpc("Windows-1250"), csv, html, sta, pdf(true);
 
 		boolean binary = false;
@@ -22,11 +24,11 @@ public class FioConstants {
 		String encoding = "UTF-8";
 
 		/**
-		 * Zakladni konstruktor ktery ma predvolenou hodnotu pro atribut
-		 * <code>binary</code> jako false a predvolenout hodnotu pro atribut
-		 * <code>encoding</code> jako UTF-8
+		 * Zakladni konstruktor ktery ma predvolenou hodnotu pro atribut <code>binary</code> jako
+		 * false a predvolenout hodnotu pro atribut <code>encoding</code> jako UTF-8
 		 */
-		AnswerFormat() {
+		AnswerFormat()
+		{
 		}
 
 		/**
@@ -34,7 +36,8 @@ public class FioConstants {
 		 * 
 		 * @param encoding
 		 */
-		AnswerFormat(String encoding) {
+		AnswerFormat(String encoding)
+		{
 			this.encoding = encoding;
 		}
 
@@ -44,21 +47,24 @@ public class FioConstants {
 		 * @param binary
 		 *            true jestlize format je binarni
 		 */
-		AnswerFormat(boolean binary) {
+		AnswerFormat(boolean binary)
+		{
 			this.binary = binary;
 		}
 
 		/**
 		 * @return kodovani pro tento typ
 		 */
-		public String getEncoding() {
+		public String getEncoding()
+		{
 			return encoding;
 		}
 
 		/**
 		 * @return true jestlize tento typ je binarni
 		 */
-		public Boolean isBinary() {
+		public Boolean isBinary()
+		{
 			return binary;
 		}
 	}
@@ -69,7 +75,8 @@ public class FioConstants {
 	 * @author dezider.mesko
 	 * 
 	 */
-	public enum OrderFormat {
+	public enum OrderFormat
+	{
 		xml, abo;
 	}
 
@@ -79,7 +86,8 @@ public class FioConstants {
 	 * @author dezider.mesko
 	 * 
 	 */
-	public enum Languages {
+	public enum Languages
+	{
 		cs, sk, en;
 	}
 }

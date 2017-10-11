@@ -12,7 +12,8 @@ import cz.fio.api.client.https.HttpsConnector;
 import cz.fio.api.client.https.HttpsRequestException;
 import cz.fio.api.client.result.FioResult;
 
-public class FioClient {
+public class FioClient
+{
 	private static final String HTTPS_WWW_FIO_CZ = "https://www.fio.cz/ib_api/rest/";
 	// by-id/{token}/{year}/{id}/transactions.{format}
 	private static final String GET_STATEMENTS = "%sby-id/%s/%s/%s/transactions.%s";
@@ -35,82 +36,100 @@ public class FioClient {
 	private HttpsConnector httpConnector;
 	private Languages answerLanguage = Languages.cs;
 
-	public FioClient(String token, AnswerFormat answerFormat) {
+	public FioClient(String token, AnswerFormat answerFormat)
+	{
 		this.token = token;
 		this.answerFormat = answerFormat;
 		setHttpConnector(new BasicHttpsConnector());
 	}
 
-	public FioResult getTransactions(Calendar from, Calendar to) throws InvalidParametersException, HttpsRequestException {
-		if (from == null || to == null || from.after(to)) {
+	public FioResult getTransactions(Calendar from, Calendar to) throws InvalidParametersException, HttpsRequestException
+	{
+		if (from == null || to == null || from.after(to))
+		{
 			throw new InvalidParametersException("From, To can't be null, and From can't be after To");
 		}
 
 		String url = String.format(GET_TRANSACTIONS, fioUrl, getToken(), dateFormatter.format(from.getTime()),
-				dateFormatter.format(to.getTime()), getAnswerFormat().toString());
+			dateFormatter.format(to.getTime()), getAnswerFormat().toString());
 		return executeRequest(url);
 	}
 
-	public FioResult getNewTransactions() throws HttpsRequestException {
+	public FioResult getNewTransactions() throws HttpsRequestException
+	{
 		String url = String.format(GET_NEW_TRANSACTIONS, fioUrl, getToken(), getAnswerFormat().toString());
 		return executeRequest(url);
 	}
 
-	public FioResult getStatement(int year, int statementNumber) throws HttpsRequestException {
-		String url = String.format(GET_STATEMENTS, fioUrl, getToken(), String.valueOf(year), String.valueOf(statementNumber),
-				getAnswerFormat().toString());
+	public FioResult getStatement(int year, int statementNumber) throws HttpsRequestException
+	{
+		String url = String.format(GET_STATEMENTS, fioUrl, getToken(), String.valueOf(year),
+			String.valueOf(statementNumber), getAnswerFormat().toString());
 		return executeRequest(url);
 	}
 
-	public FioResult setTransactionPointerByDate(Calendar date) throws HttpsRequestException, InvalidParametersException {
-		if (date == null) {
+	public FioResult setTransactionPointerByDate(Calendar date) throws HttpsRequestException, InvalidParametersException
+	{
+		if (date == null)
+		{
 			throw new InvalidParametersException("Date can't be null");
 		}
-		String url = String
-				.format(SET_LAST_BY_DATE, fioUrl, getToken(), dateFormatter.format(date.getTime()), getAnswerFormat().toString());
+		String url = String.format(SET_LAST_BY_DATE, fioUrl, getToken(), dateFormatter.format(date.getTime()),
+			getAnswerFormat().toString());
 		return executeRequest(url);
 	}
 
-	public FioResult setTransactionPointerById(int pointer) throws HttpsRequestException {
-		String url = String.format(SET_LAST_BY_ID, fioUrl, getToken(), String.valueOf(pointer), getAnswerFormat().toString());
+	public FioResult setTransactionPointerById(int pointer) throws HttpsRequestException
+	{
+		String url = String.format(SET_LAST_BY_ID, fioUrl, getToken(), String.valueOf(pointer),
+			getAnswerFormat().toString());
 		return executeRequest(url);
 	}
 
-	private FioResult executeRequest(String url) throws HttpsRequestException {
+	private FioResult executeRequest(String url) throws HttpsRequestException
+	{
 		byte[] result = httpConnector.getData(url);
 		return new FioResult(result, getAnswerFormat(), url);
 	}
 
-	public HttpsConnector getHttpConnector() {
+	public HttpsConnector getHttpConnector()
+	{
 		return httpConnector;
 	}
 
-	public void setHttpConnector(HttpsConnector connector) {
+	public void setHttpConnector(HttpsConnector connector)
+	{
 		this.httpConnector = connector;
 	}
 
-	public String getUrl() {
+	public String getUrl()
+	{
 		return fioUrl;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(String url)
+	{
 		this.fioUrl = url;
 	}
 
-	public AnswerFormat getAnswerFormat() {
+	public AnswerFormat getAnswerFormat()
+	{
 		return answerFormat;
 	}
 
-	public void setAnswerFormat(AnswerFormat dataFormat) {
+	public void setAnswerFormat(AnswerFormat dataFormat)
+	{
 		this.answerFormat = dataFormat;
 
 	}
 
-	public String getToken() {
+	public String getToken()
+	{
 		return this.token;
 	}
 
-	public void setToken(String token) {
+	public void setToken(String token)
+	{
 		this.token = token;
 	}
 
@@ -121,8 +140,10 @@ public class FioClient {
 	 * @throws HttpsRequestException
 	 * @throws InvalidParametersException
 	 */
-	public FioResult sendOrder(String order, OrderFormat format) throws HttpsRequestException, InvalidParametersException {
-		if (order == null || format == null) {
+	public FioResult sendOrder(String order, OrderFormat format) throws HttpsRequestException, InvalidParametersException
+	{
+		if (order == null || format == null)
+		{
 			throw new InvalidParametersException("Parameters can't be null");
 		}
 		HashMap<String, String> parameters = new HashMap<String, String>();
@@ -141,17 +162,18 @@ public class FioClient {
 	 * 
 	 * @return
 	 */
-	public Languages getAnswerLanguage() {
+	public Languages getAnswerLanguage()
+	{
 		return answerLanguage;
 	}
 
 	/**
-	 * Nastav jazyk popisku pri odpovedi banky. Pouziva se jenom pro odpovedi
-	 * platebnich prikazu
+	 * Nastav jazyk popisku pri odpovedi banky. Pouziva se jenom pro odpovedi platebnich prikazu
 	 * 
 	 * @param language
 	 */
-	public void setAnswerLanguage(Languages language) {
+	public void setAnswerLanguage(Languages language)
+	{
 		answerLanguage = language;
 	}
 

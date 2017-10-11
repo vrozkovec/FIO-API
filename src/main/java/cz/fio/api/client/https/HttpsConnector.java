@@ -12,7 +12,8 @@ import cz.fio.api.client.FioClient;
  * @author dezider.mesko
  * 
  */
-public interface HttpsConnector {
+public interface HttpsConnector
+{
 	/**
 	 * Wrapper pro funkci {@link #getData(URL)}
 	 * 

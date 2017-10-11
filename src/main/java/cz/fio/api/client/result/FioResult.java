@@ -5,13 +5,14 @@ import java.io.UnsupportedEncodingException;
 import cz.fio.api.client.FioConstants;
 
 /**
- * Objekt reprezentujici odpoved serveru na dotaz. Obsahuje URL ze ktere byla
- * data ziskana, format ve kterem byla ziskana a samotna data
+ * Objekt reprezentujici odpoved serveru na dotaz. Obsahuje URL ze ktere byla data ziskana, format
+ * ve kterem byla ziskana a samotna data
  * 
  * @author dezider.mesko
  * 
  */
-public class FioResult {
+public class FioResult
+{
 
 	private String requestUrl;
 	private FioConstants.AnswerFormat answerFormat;
@@ -26,7 +27,8 @@ public class FioResult {
 	 * @param requestUrl
 	 *            adresa ze ktere byla data ziskana
 	 */
-	public FioResult(byte[] response, FioConstants.AnswerFormat answerFormat, String requestUrl) {
+	public FioResult(byte[] response, FioConstants.AnswerFormat answerFormat, String requestUrl)
+	{
 		this.response = response;
 		this.answerFormat = answerFormat;
 		this.requestUrl = requestUrl;
@@ -36,7 +38,8 @@ public class FioResult {
 	 * 
 	 * @return data tak, jak byla zaslana serverem
 	 */
-	public byte[] getResponse() {
+	public byte[] getResponse()
+	{
 		return response;
 	}
 
@@ -44,7 +47,8 @@ public class FioResult {
 	 * 
 	 * @return format dat {@link AnswerFormat}
 	 */
-	public FioConstants.AnswerFormat getDataFormat() {
+	public FioConstants.AnswerFormat getDataFormat()
+	{
 		return answerFormat;
 	}
 
@@ -52,20 +56,26 @@ public class FioResult {
 	 * 
 	 * @return adresa ze ktere byla data ziskana
 	 */
-	public String getRequestURL() {
+	public String getRequestURL()
+	{
 		return requestUrl;
 	}
 
 	/**
 	 * @see cz.fio.api.client.result.FioResult#getResponseAsText()
 	 */
-	public String getResponseAsText() {
-		if (answerFormat.isBinary()) {
+	public String getResponseAsText()
+	{
+		if (answerFormat.isBinary())
+		{
 			return null;
 		}
-		try {
+		try
+		{
 			return new String(response, answerFormat.getEncoding());
-		} catch (UnsupportedEncodingException e) {
+		}
+		catch (UnsupportedEncodingException e)
+		{
 			e.printStackTrace();
 			return null;
 		}

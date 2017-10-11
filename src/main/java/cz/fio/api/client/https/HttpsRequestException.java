@@ -9,10 +9,12 @@ import java.net.MalformedURLException;
  * @author dezider.mesko
  * 
  */
-public class HttpsRequestException extends Exception {
+public class HttpsRequestException extends Exception
+{
 	private static final long serialVersionUID = 1L;
 
-	public HttpsRequestException(Exception e) {
+	public HttpsRequestException(Exception e)
+	{
 		super(e);
 	}
 }
