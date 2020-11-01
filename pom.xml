@@ -121,13 +121,13 @@
 
 	<distributionManagement>
 		<repository>
-			<id>berries.name</id>
-			<name>berries.name-releases</name>
+			<id>deploy-repo</id>
+			<name>Locally deployed releases</name>
 			<url>https://artifactory.rozkovec.name/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
-			<id>berries.name</id>
-			<name>berries.name-snapshots</name>
+			<id>deploy-repo</id>
+			<name>Locally deployed snapshots</name>
 			<url>https://artifactory.rozkovec.name/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
