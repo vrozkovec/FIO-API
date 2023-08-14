@@ -1,6 +1,7 @@
 package cz.fio.api.client;
 
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,8 +29,8 @@ public class FioClientApiFunctionsTest {
 	 */
 	private static final String SOME_DATA = "Some data";
 	FioClient fc = new FioClient("1234567890ABCDEF", AnswerFormat.json);;
-	Calendar from;
-	Calendar to;
+	LocalDate from;
+	LocalDate to;
 
 	@Mock
 	BasicHttpsConnector connector;
@@ -39,9 +40,8 @@ public class FioClientApiFunctionsTest {
 		MockitoAnnotations.initMocks(this);
 		fc.setUrl("https://localhost:8443/ib_api/rest/");
 		fc.setHttpConnector(connector);
-		from = Calendar.getInstance();
-		to = Calendar.getInstance();
-		to.add(Calendar.MONTH, 1);
+		from = LocalDate.now();
+		to = LocalDate.now().plusMonths(1);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class FioClientApiFunctionsTest {
 	}
 
 	@Test(expectedExceptions = InvalidParametersException.class, dataProvider = "invalidDates")
-	public void getDateRangeTransactionsInvalid(Calendar date1, Calendar date2) throws InvalidParametersException, URISyntaxException,
+	public void getDateRangeTransactionsInvalid(LocalDate date1, LocalDate date2) throws InvalidParametersException, URISyntaxException,
 			HttpsRequestException {
 		fc.getTransactions(date1, date2);
 	}
@@ -103,8 +103,8 @@ public class FioClientApiFunctionsTest {
 	}
 
 	@Test(dataProvider = "dates")
-	public void setTransactionPointerByDate(Calendar date1) throws HttpsRequestException, InvalidParametersException {
-		Calendar date = date1;
+	public void setTransactionPointerByDate(LocalDate date1) throws HttpsRequestException, InvalidParametersException {
+		LocalDate date = date1;
 		Mockito.when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
 		FioResult fr = null;
 		try {

@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import cz.fio.api.client.pojo.Transaction;
 import cz.fio.api.util.FioUtil;
@@ -32,6 +33,8 @@ import cz.fio.api.util.FioUtil;
  */
 public class PohybNaUctu
 {
+	public static final Locale locale = new Locale("cs", "CZ");
+
 	private long idPohybu;
 
 	private Date datum;
@@ -65,10 +68,10 @@ public class PohybNaUctu
 	public static PohybNaUctu createFrom(Transaction t)
 	{
 		PohybNaUctu pohyb = new PohybNaUctu();
-		pohyb.idPohybu = t.getIdPohybu().getValue();
+		pohyb.idPohybu = getOrNull(t.getIdPohybu());
 		// 2017-01-10+0100
-		String target = t.getDatum().getValue();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-ddZ", FioUtil.locale);
+		String target = getOrNull(t.getDatum());
+		DateFormat df = new SimpleDateFormat("yyyy-MM-ddZ", locale);
 
 		try
 		{
@@ -79,24 +82,32 @@ public class PohybNaUctu
 			throw new RuntimeException(e);
 		}
 		pohyb.castka = BigDecimal.valueOf(t.getObjem().getValue());
-		pohyb.mena = t.getMena().getValue();
-		pohyb.protiucet = t.getProtiucet().getValue();
-		pohyb.protiucetNazev = t.getNazevProtiuctu().getValue();
-		pohyb.bankaKod = t.getKodBanky().getValue();
-		pohyb.bankaNazev = t.getNazevBanky().getValue();
-		pohyb.symbolKonstantni = t.getKonstantniSymbol().getValue();
-		pohyb.symbolVariabilni = t.getVariabilniSymbol().getValue();
-		pohyb.symbolSpecificky = t.getSpecifickySymbol().getValue();
-		pohyb.uzivatelskaIdentifikace = t.getUzivatelskaIdentifikace().getValue();
-		pohyb.zpravaProPrijemce = t.getZpravaProPrijemce().getValue();
-		pohyb.typPohybu = t.getTypPohybu().getValue();
-		pohyb.provedl = t.getProvedl().getValue();
-		pohyb.upresneni = t.getUpresneni().getValue();
-		pohyb.komentar = t.getKomentar().getValue();
-		pohyb.bic = t.getBic().getValue();
-		pohyb.idPokynu = t.getIdPokynu().getValue();
+		pohyb.mena = getOrNull(t.getMena());
+		pohyb.protiucet = getOrNull(t.getProtiucet());
+		pohyb.protiucetNazev = getOrNull(t.getNazevProtiuctu());
+		pohyb.bankaKod = getOrNull(t.getKodBanky());
+		pohyb.bankaNazev = getOrNull(t.getNazevBanky());
+		pohyb.symbolKonstantni = getOrNull(t.getKonstantniSymbol());
+		pohyb.symbolVariabilni = getOrNull(t.getVariabilniSymbol());
+		pohyb.symbolSpecificky = getOrNull(t.getSpecifickySymbol());
+		pohyb.uzivatelskaIdentifikace = getOrNull(t.getUzivatelskaIdentifikace());
+		pohyb.zpravaProPrijemce = getOrNull(t.getZpravaProPrijemce());
+		pohyb.typPohybu = getOrNull(t.getTypPohybu());
+		pohyb.provedl = getOrNull(t.getProvedl());
+		pohyb.upresneni = getOrNull(t.getUpresneni());
+		pohyb.komentar = getOrNull(t.getKomentar());
+		pohyb.bic = getOrNull(t.getBic());
+		pohyb.idPokynu = getOrNull(t.getIdPokynu());
 
 		return pohyb;
+	}
+
+	private static <T> T getOrNull(IValue<T> value)
+	{
+		if (value != null)
+			return value.getValue();
+
+		return null;
 	}
 
 	/***************************************************

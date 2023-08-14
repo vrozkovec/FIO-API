@@ -1,11 +1,12 @@
 
 package cz.fio.api.client.pojo;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Mena implements Serializable
+import cz.fio.api.util.pojo.IValue;
+
+public class Mena implements IValue<String>
 {
 
 	@SerializedName("value")

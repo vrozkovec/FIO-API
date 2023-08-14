@@ -1,11 +1,12 @@
 
 package cz.fio.api.client.pojo;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Upresneni implements Serializable
+import cz.fio.api.util.pojo.IValue;
+
+public class Upresneni implements IValue<String>
 {
 
 	@SerializedName("value")

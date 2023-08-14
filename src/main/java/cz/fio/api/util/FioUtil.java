@@ -16,8 +16,8 @@
  */
 package cz.fio.api.util;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,8 +37,6 @@ import cz.fio.api.util.pojo.PohybNaUctu;
  */
 public class FioUtil
 {
-	public static final Locale locale = new Locale("cs", "CZ");
-
 	/**
 	 * Checks for account movements
 	 *
@@ -63,7 +61,7 @@ public class FioUtil
 
 			List<Transaction> transactionRecords = statement.getAccountStatement().getTransactionList().getTransaction();
 
-			ArrayList<PohybNaUctu> pohyby = new ArrayList<PohybNaUctu>();
+			ArrayList<PohybNaUctu> pohyby = new ArrayList<>();
 			for (Transaction transaction : transactionRecords)
 			{
 				pohyby.add(PohybNaUctu.createFrom(transaction));
@@ -75,25 +73,22 @@ public class FioUtil
 		{
 			throw new RuntimeException(e);
 		}
-
 	}
 
 	/**
 	 * Resets pointer to the start of the year
 	 *
 	 * @param token
+	 * @param date
 	 */
-	public static void setPointerToTheStartOfTheYear(String token)
+	public static void setPointerToTheDate(String token, LocalDate date)
 	{
 		FioClient client = new FioClient(token, AnswerFormat.json);
 
 		try
 		{
-			Calendar calendar = Calendar.getInstance(locale);
-			setMinimums(calendar, Calendar.MONTH, Calendar.DAY_OF_MONTH, Calendar.HOUR_OF_DAY, Calendar.MINUTE,
-				Calendar.SECOND, Calendar.MILLISECOND);
-			client.setTransactionPointerByDate(calendar);
-			System.err.println("<<<<POINTER TO THE YEAR BEGINNING SET>>>>");
+			client.setTransactionPointerByDate(date);
+			System.err.println("<<<<POINTER SET TO: " + date + ">>>>");
 		}
 		catch (HttpsRequestException e)
 		{
@@ -106,17 +101,12 @@ public class FioUtil
 	}
 
 	/**
-	 * Nastavi dana pole na jejich aktualni minumum.
+	 * Resets pointer to the start of the year
 	 *
-	 * @param calendar
-	 * @param fields
+	 * @param token
 	 */
-	private static void setMinimums(Calendar calendar, int... fields)
+	public static void setPointerToTheStartOfTheYear(String token)
 	{
-		for (int i : fields)
-		{
-			calendar.set(i, calendar.getActualMinimum(i));
-		}
-
+		setPointerToTheDate(token, LocalDate.now().withDayOfYear(1));
 	}
 }

@@ -1,12 +1,14 @@
 
 package cz.fio.api.client.pojo;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum implements Serializable
+import cz.fio.api.util.pojo.IValue;
+
+public class Datum implements IValue<String>
 {
+	private static final long serialVersionUID = 6346939186572186969L;
 
 	@SerializedName("value")
 	@Expose
@@ -17,7 +19,6 @@ public class Datum implements Serializable
 	@SerializedName("id")
 	@Expose
 	private Long id;
-	private final static long serialVersionUID = 6346939186572186969L;
 
 	public String getValue()
 	{

@@ -1,7 +1,8 @@
 package cz.fio.api.client;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import cz.fio.api.client.FioConstants.AnswerFormat;
@@ -32,7 +33,7 @@ public class FioClient
 	private AnswerFormat answerFormat = AnswerFormat.xml;
 	private String fioUrl = HTTPS_WWW_FIO_CZ;
 
-	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private HttpsConnector httpConnector;
 	private Languages answerLanguage = Languages.cs;
 
@@ -43,15 +44,15 @@ public class FioClient
 		setHttpConnector(new BasicHttpsConnector());
 	}
 
-	public FioResult getTransactions(Calendar from, Calendar to) throws InvalidParametersException, HttpsRequestException
+	public FioResult getTransactions(LocalDate from, LocalDate to) throws InvalidParametersException, HttpsRequestException
 	{
-		if (from == null || to == null || from.after(to))
+		if (from == null || to == null || from.isAfter(to))
 		{
 			throw new InvalidParametersException("From, To can't be null, and From can't be after To");
 		}
 
-		String url = String.format(GET_TRANSACTIONS, fioUrl, getToken(), dateFormatter.format(from.getTime()),
-			dateFormatter.format(to.getTime()), getAnswerFormat().toString());
+		String url = String.format(GET_TRANSACTIONS, fioUrl, getToken(), dateFormatter.format(from),
+			dateFormatter.format(to), getAnswerFormat().toString());
 		return executeRequest(url);
 	}
 
@@ -68,13 +69,13 @@ public class FioClient
 		return executeRequest(url);
 	}
 
-	public FioResult setTransactionPointerByDate(Calendar date) throws HttpsRequestException, InvalidParametersException
+	public FioResult setTransactionPointerByDate(LocalDate date) throws HttpsRequestException, InvalidParametersException
 	{
 		if (date == null)
 		{
 			throw new InvalidParametersException("Date can't be null");
 		}
-		String url = String.format(SET_LAST_BY_DATE, fioUrl, getToken(), dateFormatter.format(date.getTime()),
+		String url = String.format(SET_LAST_BY_DATE, fioUrl, getToken(), dateFormatter.format(date),
 			getAnswerFormat().toString());
 		return executeRequest(url);
 	}
