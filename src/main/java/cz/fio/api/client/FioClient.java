@@ -15,7 +15,7 @@ import cz.fio.api.client.result.FioResult;
 
 public class FioClient
 {
-	private static final String HTTPS_WWW_FIO_CZ = "https://www.fio.cz/ib_api/rest/";
+	private static final String HTTPS_WWW_FIO_CZ = "https://fioapi.fio.cz/v1/rest/";
 	// by-id/{token}/{year}/{id}/transactions.{format}
 	private static final String GET_STATEMENTS = "%sby-id/%s/%s/%s/transactions.%s";
 	// periods/{token}/{datum od}/{datum do}/transactions.{format}

@@ -67,7 +67,7 @@ public class BasicHttpsConnectorTest {
 				response.setContentType("text/html;charset=utf-8");
 				response.setStatus(HttpServletResponse.SC_OK);
 				baseRequest.setHandled(true);
-				Pattern pattern = Pattern.compile("(/ib_api/rest/)([a-z-]*)(/.*)");
+				Pattern pattern = Pattern.compile("(/v1/rest/)([a-z-]*)(/.*)");
 				String function = "";
 				Matcher matcher = pattern.matcher(target);
 				if (matcher.matches()) {
@@ -115,10 +115,10 @@ public class BasicHttpsConnectorTest {
 	@DataProvider
 	public Object[][] queries() {
 		return new Object[][] {
-				new Object[] { "https://localhost:8443/ib_api/rest/last/TOKEN/transactions.json", "Connected!".getBytes(), false },
-				new Object[] { "https://localhost:8443/ib_api/rest/invalid-token/transactions.json", null, true },
-				new Object[] { "https://localhost:8443/ib_api/rest/invalid-date/transactions.json", null, true },
-				new Object[] { "https://localhost:8443/ib_api/rest/invalid-function/transactions.json", null, true },
+				new Object[] { "https://localhost:8443/rest/last/TOKEN/transactions.json", "Connected!".getBytes(), false },
+				new Object[] { "https://localhost:8443/rest/invalid-token/transactions.json", null, true },
+				new Object[] { "https://localhost:8443/rest/invalid-date/transactions.json", null, true },
+				new Object[] { "https://localhost:8443/rest/invalid-function/transactions.json", null, true },
 				new Object[] { "invalid address", null, true } };
 	}
 
@@ -149,7 +149,7 @@ public class BasicHttpsConnectorTest {
 		BasicHttpsConnector hc = new BasicHttpsConnector();
 		hc.setDefaultSSLSocketFactory(getDefaultSSLSocketFactory());
 		try {
-			byte[] resultData = hc.getPostData("https://localhost:8443/ib_api/rest/import", postParams);
+			byte[] resultData = hc.getPostData("https://localhost:8443/rest/import", postParams);
 			if (expectedResult != null) {
 				Assert.assertEquals(resultData, expectedResult);
 			}

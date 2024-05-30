@@ -38,7 +38,7 @@ public class FioClientApiFunctionsTest {
 	@BeforeMethod
 	public void beforeMethod() {
 		MockitoAnnotations.initMocks(this);
-		fc.setUrl("https://localhost:8443/ib_api/rest/");
+		fc.setUrl("https://localhost:8443/v1/rest/");
 		fc.setHttpConnector(connector);
 		from = LocalDate.now();
 		to = LocalDate.now().plusMonths(1);
