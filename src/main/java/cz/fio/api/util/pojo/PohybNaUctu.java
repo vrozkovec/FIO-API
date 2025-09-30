@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import cz.fio.api.client.pojo.Transaction;
-import cz.fio.api.util.FioUtil;
 
 /**
  * This domain object contains flatenned response for ease of use.

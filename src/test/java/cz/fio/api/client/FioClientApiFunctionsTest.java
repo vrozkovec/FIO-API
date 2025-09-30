@@ -2,7 +2,6 @@ package cz.fio.api.client;
 
 import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +14,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import cz.fio.api.client.FioClient;
-import cz.fio.api.client.InvalidParametersException;
 import cz.fio.api.client.FioConstants.AnswerFormat;
 import cz.fio.api.client.FioConstants.OrderFormat;
 import cz.fio.api.client.https.BasicHttpsConnector;

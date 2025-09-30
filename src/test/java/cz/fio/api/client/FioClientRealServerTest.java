@@ -1,13 +1,9 @@
 package cz.fio.api.client;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 import org.testng.annotations.Test;
 
-import cz.fio.api.client.FioClient;
-import cz.fio.api.client.FioConstants;
-import cz.fio.api.client.InvalidParametersException;
 import cz.fio.api.client.https.HttpsRequestException;
 import cz.fio.api.client.result.FioResult;
 

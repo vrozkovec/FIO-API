@@ -3,6 +3,7 @@ package cz.fio.api.client.result;
 import java.io.UnsupportedEncodingException;
 
 import cz.fio.api.client.FioConstants;
+import cz.fio.api.client.FioConstants.AnswerFormat;
 
 /**
  * Objekt reprezentujici odpoved serveru na dotaz. Obsahuje URL ze ktere byla data ziskana, format

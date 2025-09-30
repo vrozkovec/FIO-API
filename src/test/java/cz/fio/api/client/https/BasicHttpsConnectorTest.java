@@ -31,9 +31,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import cz.fio.api.client.https.BasicHttpsConnector;
-import cz.fio.api.client.https.HttpsRequestException;
-
 public class BasicHttpsConnectorTest {
 	Server server = null;
 

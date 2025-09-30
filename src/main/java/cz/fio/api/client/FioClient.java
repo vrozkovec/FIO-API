@@ -1,6 +1,5 @@
 package cz.fio.api.client;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
