@@ -1,8 +1,10 @@
 package cz.fio.api.client;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mockito.ArgumentMatcher;
@@ -34,7 +36,7 @@ public class FioClientApiFunctionsTest {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.openMocks(this);
 		fc.setUrl("https://localhost:8443/v1/rest/");
 		fc.setHttpConnector(connector);
 		from = LocalDate.now();
@@ -69,45 +71,45 @@ public class FioClientApiFunctionsTest {
 	public void getDateRangeTransactionsValid() throws InvalidParametersException, URISyntaxException, HttpsRequestException {
 		FioResult fr = fc.getTransactions(from, to);
 		Assert.assertNotNull(fr);
-		Mockito.verify(connector).getData(Mockito.matches(".*/periods/.+/[0-9-]+/[0-9-]+/transactions.json"));
+		verify(connector).getData(Mockito.matches(".*/periods/.+/[0-9-]+/[0-9-]+/transactions.json"));
 	}
 
 	@Test
 	public void getStatement() throws HttpsRequestException {
 		int year = 2013;
 		int statementNumber = 1;
-		Mockito.when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
+		when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
 		FioResult fr = fc.getStatement(year, statementNumber);
 		Assert.assertNotNull(fr);
-		Mockito.verify(connector).getData(Mockito.matches(".*/by-id/.+/[0-9]{4}/[0-9]+/transactions.json"));
+		verify(connector).getData(Mockito.matches(".*/by-id/.+/[0-9]{4}/[0-9]+/transactions.json"));
 	}
 
 	@Test
 	public void getNewTransactions() throws HttpsRequestException {
-		Mockito.when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
+		when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
 		FioResult fr = fc.getNewTransactions();
 		Assert.assertNotNull(fr);
-		Mockito.verify(connector).getData(Mockito.matches(".*/last/.+/transactions.json"));
+		verify(connector).getData(Mockito.matches(".*/last/.+/transactions.json"));
 	}
 
 	@Test
 	public void setTransactionPointerById() throws HttpsRequestException {
 		int pointer = 0;
-		Mockito.when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
+		when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
 		FioResult fr = fc.setTransactionPointerById(pointer);
 		Assert.assertNotNull(fr);
-		Mockito.verify(connector).getData(Mockito.matches(".*/set-last-id/.+/[0-9]+/"));
+		verify(connector).getData(Mockito.matches(".*/set-last-id/.+/[0-9]+/"));
 	}
 
 	@Test(dataProvider = "dates")
 	public void setTransactionPointerByDate(LocalDate date1) throws HttpsRequestException, InvalidParametersException {
 		LocalDate date = date1;
-		Mockito.when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
+		when(connector.getData(Mockito.anyString())).thenReturn(SOME_DATA.getBytes());
 		FioResult fr = null;
 		try {
 			fr = fc.setTransactionPointerByDate(date);
 			Assert.assertNotNull(fr);
-			Mockito.verify(connector).getData(Mockito.matches(".*/set-last-date/.+/[0-9-]+/"));
+			verify(connector).getData(Mockito.matches(".*/set-last-date/.+/[0-9-]+/"));
 		} catch (InvalidParametersException ipe) {
 			Assert.assertNull(fr);
 			Assert.assertNull(date1);
@@ -122,13 +124,13 @@ public class FioClientApiFunctionsTest {
 
 	@Test(dataProvider = "sendOrder")
 	public void sendRequest(String order, OrderFormat format, Boolean exceptionExpected) throws HttpsRequestException {
-		Mockito.when(connector.getPostData(Mockito.anyString(), Mockito.anyMapOf(String.class, String.class))).thenReturn(
+		when(connector.getPostData(Mockito.anyString(), Mockito.anyMap())).thenReturn(
 				SOME_DATA.getBytes());
 		FioResult fr = null;
 		try {
 			fr = fc.sendOrder(order, format);
 			Assert.assertNotNull(fr);
-			Mockito.verify(connector).getPostData(Mockito.matches(".*/import/"), Mockito.argThat(new isCorrectHashMap()));
+			verify(connector).getPostData(Mockito.matches(".*/import/"), Mockito.argThat(new isCorrectHashMap()));
 		} catch (InvalidParametersException e) {
 			if (!exceptionExpected) {
 				Assert.fail();
@@ -136,10 +138,11 @@ public class FioClientApiFunctionsTest {
 		}
 	}
 
-	class isCorrectHashMap extends ArgumentMatcher<Map<String, String>> {
+	class isCorrectHashMap implements ArgumentMatcher<Map<String, String>> {
+		
 		@Override
-		public boolean matches(Object argument) {
-			HashMap<String, String> map = (HashMap<String, String>) argument;
+		public boolean matches(Map<String, String> map)
+		{
 			return map.containsKey("lng") && map.containsKey("token") && map.get("token") != null && map.containsKey("type")
 					&& map.get("type") != null && map.containsKey("file") && map.get("file") != null && map.containsKey("filename");
 		}

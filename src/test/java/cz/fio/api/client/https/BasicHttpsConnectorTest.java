@@ -11,9 +11,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.HttpConfiguration;
@@ -31,6 +28,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 public class BasicHttpsConnectorTest {
 	Server server = null;
 
@@ -45,7 +46,7 @@ public class BasicHttpsConnectorTest {
 		https_config.setOutputBufferSize(32768);
 		https_config.addCustomizer(new SecureRequestCustomizer());
 
-		SslContextFactory sslContextFactory = new SslContextFactory();
+		SslContextFactory.Server sslContextFactory = new SslContextFactory.Server();
 		URL kstore = this.getClass().getResource("/keystore");
 		sslContextFactory.setKeyStorePath(kstore.getPath());
 		sslContextFactory.setKeyStorePassword("httptest");
